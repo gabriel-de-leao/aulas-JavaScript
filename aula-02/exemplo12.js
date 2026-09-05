@@ -6,4 +6,4 @@ console.log(frutas)
 console.log("Processando...\n")
 //-----------------------------
 let remover = frutas.splice(-2) // splice para remover as duas ultimas frutas do array
-console.log(frutas) 
+console.log(frutas)
