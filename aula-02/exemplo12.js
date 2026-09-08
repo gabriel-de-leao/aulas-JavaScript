@@ -1,4 +1,4 @@
-const frutas = ['Maçã', 'Banana', 'Uva'];
+const frutas = ['Maçã', 'Banana', 'Laranja'];
 
 frutas.push("Abacate", "Abacaxi", "Morango"); //push para adicionar ao final do array, caso eu queira adicionar no começo uso o unshift.
 console.log(frutas)
