@@ -65,7 +65,7 @@ function registrar () { // Registra novos itens para o catálogo
     nomeItem[i] = prompt(`Digite o nome do item: `) 
     
     precoItem[i] = parseFloat(prompt(`Digite o preço do item: `))
-    // Recebe o preço do item digitado pelo usuário e transforma em número com virgula
+    // Recebe o preço do item digitado pelo usuário e transforma em número decimal
         while (precoItem[i] < 0) {  // Verifica se o preço digitado é valido, se não for manda digitar novamente
             console.log(`Preço inválido, Digite um valor válido (maior que 0): `)
             precoItem[i] = parseFloat(prompt(`Digite o preço do item: `))
@@ -84,7 +84,7 @@ function raridades (precoDoItem){  // Define a raridade de acordo com o preço d
         return `Lendário` // Se o preço for maior ou igual a 500, o item é lendário
     }
     else if (precoDoItem > 100 && precoDoItem < 500){
-        return `Raro` // Se o preço for maior ou igual e menor que 500, o item é raro
+        return `Raro` // Se o preço for maior que 100 e menor que 500, o item é raro
     }
     else{
         return `Comum` // Se o item não entrar em nenhuma das condições, ele é comum
@@ -100,7 +100,7 @@ function listagem() { // Lista de todos os itens cadastrados no catálogo
     let i = 0  
 
     for (i = 0; i < finalVetor; i++) { 
-        // Percorre os itens cadastrados, se encontrar uma posição vazia ele para
+        // Percorre os itens cadastrados
 
         if (nomeItem[i] === undefined) {
             continue
