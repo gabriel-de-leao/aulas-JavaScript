@@ -1,150 +1,191 @@
 const nomeItem = []
 const precoItem = []
 let raridade = []
-let estoque = []
-const prompt = require(`prompt-sync`)()
-const escolha = []
+let estoqueItem = []
+const prompt = require(`prompt-sync`)() // Recebe os dados digitados pelo usuário
 let id = []
 const finalVetor = 100
-// Mostra os itens que estão disponíveis no catálogo da loja
-const catalogo_itens = ['Espada de fogo rasga céus', 'Armadura de titânio', 'Poção de cura', 'Elixir da vida', 'Anel da invisibilidade']
-
-function Vazio () {
-    let espacoVazio = -1;
-    for (let i = 0; i < nomeItem.length; i++) {
-        if (!(i in nomeItem)){
-            espacoVazio = i;
-            break;
-        }
-    }
-    if (espacoVazio === -1) {
-        espacoVazio = nomeItem.length;
-
-
-    }
-
-    return espacoVazio;
-
-}
-
-function telaInicial () {
-    console.clear()
-
-    console.log (`|----------------------------------------------------|`)
-    console.log (`|                  Menu Principal                    |`)
-    console.log (`|   1 - Cadastro                                     |`)
-    console.log (`|   2 - Listagem                                     |`)
-    console.log (`|   3 - Apagar                                       |`)
-    console.log (`|   4 - Sair                                         |`)
-    console.log (`|----------------------------------------------------|`)
-     
-    }
-     let proximaTela = 0
 
 
 
-while (proximaTela !== 4) {
-    telaInicial();
-    proximaTela = parseInt(prompt(`Para onde você deseja ir? `));
-  
+function excluir() { // Function para excluir um item seleciado pelo usuário
 
-    if (proximaTela === 1) {
-    cadastroItem();
-    }
+        let i = 0
+        // Recebe o ID digitado pelo usuário para excluir o item
+        itemExclusao = parseInt(prompt(`Digite o ID do item que deseja excluir: `))
 
-    else if (proximaTela === 2) {
-    listagem();
-    }
-    else if (proximaTela === 3) {
-    apagarItem();
-    }
-    else if (proximaTela === 4)
-        console.log (`Saindo do sistema`)
-    
-    else {
-    console.log("Opção errada! ");
-    prompt((`Digite Novamente`))
-    }
-}   
+        // Procura o iten no vetor com o ID digitado pelo usuário
+    for (i = 0; i < finalVetor; i++) { 
 
-
-
-
-function cadastroItem () { 
-    
-    let i = Vazio();
-    
-    nomeItem[i] = prompt(`Digite o nome do novo item: `)
-    precoItem[i] = parseFloat(prompt(`Digite o preço do item ${i + 1}: `))
-    estoque[i] = parseInt(prompt(`Digite a quantidade em estoque do item ${i + 1}: `))
-    console.clear()
-
-if (precoItem[i] < 0) { // Não deixa que o usuário cadastre um preço negativo
-    console.log(`O preço do item não pode ser negativo.`)
-    while (precoItem[i] < 0) {
-        precoItem[i] = parseFloat(prompt(`Digite o preço do item ${i + 1}: `))
-    }
-}
-
-if (precoItem[i] < 100){  // Define a raridade apartir do preço
-    raridade[i] = `Comum`
-}
-else if (precoItem[i] >= 100 && precoItem[i] < 500){
-    raridade[i] = `Raro`
-}
-else {
-    raridade[i] = `Lendário`
-};
-    prompt(`Pressione ENTER para continuar`)
-}
-
-function apagarItem (){
-
-    let apagarID = parseInt(prompt(`Digite o ID que você deseja excluir: `))
-
-    let indice = apagarID - 1
-
-    if (indice >= 0 && (indice in nomeItem)){
-        console.log (`Deseja realmente apagar o item ${nomeItem[indice]} ? `)
-        let confirmacao = prompt("Responda com S ou N: ").toUpperCase()
-        
-        
-        if (confirmacao === `S`){
-            delete nomeItem[indice]
-            delete precoItem[indice]
-            delete estoque[indice]
-            delete raridade[indice]
-            delete id[indice]
-
-            console.log (`Item removido`)
+        if (nomeItem[i] === undefined) {
+            break
         }
 
+        if (id[i] === itemExclusao){
+
+        delete nomeItem[i] // Exclui os dados do item
+        delete precoItem[i]
+        delete estoqueItem[i]
+        delete id[i]
+        delete raridade[i]
+        
+        break
+        
+        }
+
+    }
+          // Confirmação que o item foi excluído corretamente
+        console.log(`Item Excluído com sucesso!`)
+
+    prompt(`Digite ENTER para voltar ao menu principal: `)
+}
+
+
+
+function registrar () { // Registra novos itens para o catálogo
+
+    console.clear()
+
+    let i = 0
+    for (i = 0; i < finalVetor; i++) { 
+        if (nomeItem[i] === undefined) {
+            break
+// Procura a primeira posição vazia no vetor para registrar o item
+        }
+    }
+
+    console.log(`================================================`)
+    console.log(`|                                              |`)
+    console.log(`|               REGISTRAR ITEM                 |`)
+    console.log(`|                                              |`)
+    console.log(`================================================`)
+    // Recebe o nome do item digitado pelo usuário
+    nomeItem[i] = prompt(`Digite o nome do item: `) 
+    
+    precoItem[i] = parseFloat(prompt(`Digite o preço do item: `))
+    // Recebe o preço do item digitado pelo usuário e transforma em número com virgula
+        while (precoItem[i] < 0) {  // Verifica se o preço digitado é valido, se não for manda digitar novamente
+            console.log(`Preço inválido, Digite um valor válido (maior que 0): `)
+            precoItem[i] = parseFloat(prompt(`Digite o preço do item: `))
+        }
+        // Recebe quantos itens estão em estoque e transforma em número inteiro
+    estoqueItem[i] = parseInt(prompt(`Digite a quantidade em estoque: `))
+    id[i] = i + 1
+    
+}
+
+function raridades (){  // Define a raridade de acordo com o preço do item
+    if (precoItem >= 500) { 
+        return `Lendário` // Se o preço for maior ou igual a 500, o item é lendário
+    }
+    else if (precoItem > 100 && precoItem < 500){
+        return `Raro` // Se o preço for maior ou igual e menor que 500, o item é raro
+    }
+    else{
+        return `Comum` // Se o item não entrar em nenhuma das condições, ele é comum
+    }
+        
+}
+
+
+function listagem() { // Lista de todos os itens cadastrados no catálogo
+
+    console.clear()
+
+    let i = 0  
+
+    for (i = 0; i < finalVetor; i++) { 
+        // Percorre os itens cadastrados, se encontrar uma posição vazia ele para
+
+        if (nomeItem[i] === undefined) {
+            break
+        }
+    
+        // Mostra a ficha de cada item cadastrado no catálogo
+        console.log(`\n|=============================================|`)
+        console.log(`|                                             |`)
+        console.log(`|               FICHA DE ITENS                |`)
+        console.log(`|                                             |`)
+        console.log(`|=============================================|\n`)
+       
+        console.log(`Nome do Item: ${nomeItem[i]}`)
+        console.log(`Preço do Item R$: ${precoItem[i]}`)
+        console.log(`Estoque: ${estoqueItem[i]}`)
+        console.log(`Raridade: ${raridades(precoItem[i])}`)
+        console.log(`ID do Item: ${id[i]}`)
+        // Verifica se o item está disponível no estoque e se o preço é maior que 0
+        const disponibilidade = estoqueItem[i] > 0 && precoItem[i] > 0 ? 'Disponível' : 'Indisponível'
+        console.log(`Disponibilidade: ${disponibilidade}`)
+        }
+
+    prompt (`Digite ENTER para voltar ao menu principal: `)
+
+}
+
+function catalogo_Itens(){ // Mostra os itens na loja
+
+    console.clear()
+
+    console.log(`|==============================================|`)
+    console.log(`|                ITENS DA LOJA                 |`)
+    console.log(`|==============================================|\n`)
+
+    for (const item of nomeItem){ // percorre os nomes dos itens cadastrados
+        if (item === undefined) continue
+             console.log(`Item ${item}`)
+             console.log(`|=================================|\n`)
             
-        else {
-            console.log(`Operação cancelada`)
-        }
-    }    
-    prompt(`Pressione ENTER para continuar`)
+    }
+
+    prompt (`Digite ENTER para voltar ao menu principal: `)
+
 }
 
-function listagem() {
-    console.clear();
-    console.log(`|===========================================================================|`);
-    console.log(`|                ITENS NO ESTOQUE                                           |`);
-    console.log(`|===========================================================================|`);
+
+
+
+function telaInicial () { // Mostra o menu principal da loja
+
+    console.clear()
     
-    if (estoque.length === 0) {
-        console.log(`| O estoque está completamente vazio.                |`);
-    } else {
-        for (let i = 0; i < nomeItem.length; i++) {
-            if (i in nomeItem) {
-                console.log(`| ID: ${i + 1} | ${nomeItem[i]} | Preço: R$ ${precoItem[i]} | Estoque: ${estoque[i]} unidade | Raridade: ${raridade[i]}`);
-        }
-    }  
-}
+    console.log(`|==============================================|`) 
+    console.log(`|                                              |`)
+    console.log(`|               MENU PRINCIPAL                 |`)
+    console.log(`|                                              |`)
+    console.log(`|    1 Registrar                               |`)
+    console.log(`|    2 Listar                                  |`)
+    console.log(`|    3 Excluir                                 |`)
+    console.log(`|    4 Catalogo de Itens                       |`)
+    console.log(`|    5 Sair                                    |`)
+    console.log(`|                                              |`)
+    console.log(`|                                              |`)
+    console.log(`|==============================================|`)
+    }
+
   
-    console.log(`|===========================================================================|`);
+    
+    let opcaoEscolhida = 0 // Recebe a opção escolhida no menu
+
+
+    while (opcaoEscolhida !== 5) { 
+    // Enquanto a opçao do menu for diferente de 5, ele continua mostrando o menu
+
+        telaInicial(); // Mostra o menu principal
+        opcaoEscolhida = parseInt(prompt(`O que deseja fazer?: `)) // Recebe a opção escolhida pelo usuário
     
     
-    prompt('\nPressione ENTER para voltar ao Menu Principal');
-} 
+        // De acordo com a opção escolhida, ele chama a função correspondente ao número escolhido
+        if (opcaoEscolhida === 1) {
+            registrar()
+        }
+        else if (opcaoEscolhida === 2) {
+            listagem()
+        }
+        else if (opcaoEscolhida === 3) {
+            excluir()
+        }
+        else if (opcaoEscolhida === 4) {
+            catalogo_Itens()
+        }
+
+}
