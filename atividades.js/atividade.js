@@ -102,11 +102,11 @@ function apagarItem (){
 
     let apagarID = parseInt(prompt(`Digite o ID que você deseja excluir: `))
 
-    let indice = apagarID
+    let indice = apagarID - 1
 
     if (indice >= 0 && (indice in nomeItem)){
         console.log (`Deseja realmente apagar o item ${nomeItem[indice]} ? `)
-        let confirmacao = prompt("Responda com S ou N").toUpperCase()
+        let confirmacao = prompt("Responda com S ou N: ").toUpperCase()
         
         
         if (confirmacao === `S`){
