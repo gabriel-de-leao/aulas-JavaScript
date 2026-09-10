@@ -1,75 +1,196 @@
-// Informações dos itens 
-const nomeItem = `Espada de fogo rasga céus`
-const precoItem = 500
-let raridade = `Lendário`
-let estoque = 12
+const nomeItem = [`Espada de Fogo`, `Bota de Velocidade`, `Capacete Dourado`, `Peitoral de Fogo`, `Calça Flamejante`]
+const precoItem = [300, 200, 500, 400, 350]
+let raridade = [`Raro`, `Raro`, `Lendário`,`Raro`, `Raro`]
+let estoqueItem = [3, 5, 1, 2, 6]
+const prompt = require(`prompt-sync`)() // Recebe os dados digitados pelo usuário
+let id = [1, 2, 3, 4, 5]
+const finalVetor = 100
 
-// Mostra uma lista com os itens disponíveis no catálogo
-const catalogo_itens = ['Espada de fogo rasga céus', 'Armadura de titânio', 'Poção de cura', 'Elixir da vida', 'Anel da invisibilidade']
 
-// Verifica se o preço informado é negativo
-if (precoItem < 0) {
-    console.log(`O preço do item não pode ser negativo.`)
+
+function excluir() { // Function para excluir um item seleciado pelo usuário
+
+    console.clear()
+
+        let i = 0
+        // Recebe o ID digitado pelo usuário para excluir o item
+        itemExclusao = parseInt(prompt(`Digite o ID do item que deseja excluir: `))
+
+        // Procura o iten no vetor com o ID digitado pelo usuário
+    for (i = 0; i < finalVetor; i++) { 
+
+        if (nomeItem[i] === undefined) {
+            continue
+        }
+
+        if (id[i] === itemExclusao){
+
+        delete nomeItem[i] // Exclui os dados do item
+        delete precoItem[i]
+        delete estoqueItem[i]
+        delete id[i]
+        delete raridade[i]
+        
+        break
+        
+        }
+
+    }
+          // Confirmação que o item foi excluído corretamente
+        console.log(`Item Excluído com sucesso!`)
+
+    prompt(`Digite ENTER para voltar ao menu principal: `)
 }
-// Verifica se o preço informado menor que 100, caso seja o iten receberá a raridade comum
-if (precoItem < 100){
-    raridade = `Comum`
-}
-// Verifica se o preço informado maior ou igual a 100, caso seja o iten receberá a raridade rara
-else if (precoItem >= 100 && precoItem < 500){
-    raridade = `Raro`
-}
-// Caso  o item não entre em nenhum dos dois acima ele vai receber a raridade lendária
-else {
-    raridade = `Lendário`
-};     
-// Verifica se o preço é maior que 500 para colocar o item em destaque
-const emDestaque = precoItem > 500 ? true : false
-// Verifica se o item possui estoque e preço válido
-const disponibilidade = estoque > 0 && precoItem > 0 ? `Está disponível` : `Não está disponível`
 
 
-// Mostra as fichas dos itens
-function FichaDeItens() { 
-    console.log(`|--------------FICHA DE ITENS-----------------|\n`)
-    console.log(`Nome do item:  ${nomeItem}`)
-    console.log(`Preço do item: R$ ${precoItem}`)
-    console.log(`Raridade do item: ${raridade}`)
-    console.log(`Quantidade em estoque: ${estoque}`)
-    console.log (`Disponibilidade: ${disponibilidade}`)
-    console.log(`Esse item custa mais que 500? ${emDestaque}`)
 
-    return (`\n|--------------FICHA DE ITENS-----------------|\n`)
-}
-// Retorna a função FichaDeItens para mostrar o resultado
-console.log(FichaDeItens())
+function registrar () { // Registra novos itens para o catálogo
 
-// Mostra os itens que estão em promoção, apenas itens com o índice par
-for (let i = 1; i <= 5; i++) {
+    console.clear()
+
+    let i = 0
+    for (i = 0; i < finalVetor; i++) { 
+        if (nomeItem[i] === undefined) {
+            break
+// Procura a primeira posição vazia no vetor para registrar o item
+        }
+    }
+
+    console.log(`================================================`)
+    console.log(`|                                              |`)
+    console.log(`|               REGISTRAR ITEM                 |`)
+    console.log(`|                                              |`)
+    console.log(`================================================`)
+    // Recebe o nome do item digitado pelo usuário
+    nomeItem[i] = prompt(`Digite o nome do item: `) 
     
-    if (i % 2 === 0) {
-        console.log(`O item ${i} está cadastrado e está em promoção`)
-    }
-    else {
-        console.log(`O item ${i} foi cadastrado`)
-    }
+    precoItem[i] = parseFloat(prompt(`Digite o preço do item: `))
+    // Recebe o preço do item digitado pelo usuário e transforma em número com virgula
+        while (precoItem[i] < 0) {  // Verifica se o preço digitado é valido, se não for manda digitar novamente
+            console.log(`Preço inválido, Digite um valor válido (maior que 0): `)
+            precoItem[i] = parseFloat(prompt(`Digite o preço do item: `))
+        }
+        // Recebe quantos itens estão em estoque e transforma em número inteiro
+    estoqueItem[i] = parseInt(prompt(`Digite a quantidade em estoque: `))
+    id[i] = i + 1
+
+    console.log(`\nItem ${nomeItem[i]} cadastrado com sucesso!\n`)
+    prompt(`Digite ENTER para voltar ao menu principal`)
+    
 }
 
-console.log (`|--------------ESTOQUE-----------------|\n`)
-// Exibe a quantidade inicial disponível no estoque
-console.log (`Estoque inicial do item ${nomeItem} : ${estoque} unidades disponiveis\n`)
-// Continua enquanto ainda houver itens no estoque
-while (estoque > 0) {
-    // Retira uma unidade do estoque a cada compra
-    estoque -= 1
-    console.log(` O estoque foi atualizado para ${estoque}.\n`) // Mostra a quantidade atualizada depois da compra
-    console.log (`|--------------------------------------------|`)
-    if (estoque === 0) { // Verifica se o estoque chegou a zero, se for true ele mostra que o itens está esgotado
-        console.log(`O item ${nomeItem} está esgotado.\n`)
+function raridades (precoDoItem){  // Define a raridade de acordo com o preço do item
+    if (precoDoItem >= 500) { 
+        return `Lendário` // Se o preço for maior ou igual a 500, o item é lendário
     }
+    else if (precoDoItem > 100 && precoDoItem < 500){
+        return `Raro` // Se o preço for maior ou igual e menor que 500, o item é raro
+    }
+    else{
+        return `Comum` // Se o item não entrar em nenhuma das condições, ele é comum
+    }
+        
 }
-// Percorre todos os itens armazenados no catálogo
-console.log(`|-------------- Itens da loja ---------------|\n`)
-for (const item of catalogo_itens) {
-    console.log(`Item: ${item}`);
-}   
+
+
+function listagem() { // Lista de todos os itens cadastrados no catálogo
+
+    console.clear()
+
+    let i = 0  
+
+    for (i = 0; i < finalVetor; i++) { 
+        // Percorre os itens cadastrados, se encontrar uma posição vazia ele para
+
+        if (nomeItem[i] === undefined) {
+            continue
+        }
+    
+        // Mostra a ficha de cada item cadastrado no catálogo
+        console.log(`\n|=============================================|`)
+        console.log(`|                                             |`)
+        console.log(`|               FICHA DE ITENS                |`)
+        console.log(`|                                             |`)
+        console.log(`|=============================================|\n`)
+       
+        console.log(`Nome do Item: ${nomeItem[i]}`)
+        console.log(`Preço do Item R$: ${precoItem[i]}`)
+        console.log(`Estoque: ${estoqueItem[i]}`)
+        console.log(`Raridade: ${raridades(precoItem[i])}`)
+        console.log(`ID do Item: ${id[i]}`)
+        // Verifica se o item está disponível no estoque e se o preço é maior que 0
+        const disponibilidade = estoqueItem[i] > 0 && precoItem[i] > 0 ? 'Disponível' : 'Indisponível'
+        console.log(`Disponibilidade: ${disponibilidade}`)
+        }
+
+    prompt (`Digite ENTER para voltar ao menu principal: `)
+
+}
+
+function catalogo_Itens(){ // Mostra os itens na loja
+
+    console.clear()
+
+    console.log(`|==============================================|`)
+    console.log(`|                ITENS DA LOJA                 |`)
+    console.log(`|==============================================|\n`)
+
+    for (const item of nomeItem){ // percorre os nomes dos itens cadastrados
+        if (item === undefined) continue
+             console.log(`Item ${item}`)
+             console.log(`|=================================|\n`)
+            
+    }
+
+    prompt (`Digite ENTER para voltar ao menu principal: `)
+
+}
+
+
+
+
+function telaInicial () { // Mostra o menu principal da loja
+
+    console.clear()
+    
+    console.log(`|==============================================|`) 
+    console.log(`|                                              |`)
+    console.log(`|               MENU PRINCIPAL                 |`)
+    console.log(`|                                              |`)
+    console.log(`|    1 Registrar                               |`)
+    console.log(`|    2 Listar                                  |`)
+    console.log(`|    3 Excluir                                 |`)
+    console.log(`|    4 Catalogo de Itens                       |`)
+    console.log(`|    5 Sair                                    |`)
+    console.log(`|                                              |`)
+    console.log(`|                                              |`)
+    console.log(`|==============================================|`)
+    }
+
+  
+    
+    let opcaoEscolhida = 0 // Recebe a opção escolhida no menu
+
+
+    while (opcaoEscolhida !== 5) { 
+    // Enquanto a opçao do menu for diferente de 5, ele continua mostrando o menu
+
+        telaInicial(); // Mostra o menu principal
+        opcaoEscolhida = parseInt(prompt(`O que deseja fazer?: `)) // Recebe a opção escolhida pelo usuário
+    
+    
+        // De acordo com a opção escolhida, ele chama a função correspondente ao número escolhido
+        if (opcaoEscolhida === 1) {
+            registrar()
+        }
+        else if (opcaoEscolhida === 2) {
+            listagem()
+        }
+        else if (opcaoEscolhida === 3) {
+            excluir()
+        }
+        else if (opcaoEscolhida === 4) {
+            catalogo_Itens()
+        }
+
+}
