@@ -3,7 +3,7 @@ let total = 0
 
   for (const preco of precos) {
     total += preco
-  }
+}
 
 return total
 }
