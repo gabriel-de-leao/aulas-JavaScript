@@ -11,4 +11,4 @@ function estoque () {
             
         }
 }
-console.log(`O estoque está: ${estoque(10)}`)
+estoque()

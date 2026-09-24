@@ -6,4 +6,4 @@ const energiaInicial =  function (stamina) {
 
     }
 }
-console.log (`A energia do personagem é de: ${energiaInicial(100)}`)
+energiaInicial(100)
