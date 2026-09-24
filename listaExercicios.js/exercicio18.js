@@ -2,11 +2,10 @@ const mudar = function (booleanos = [true, false]){
     const mudando = []
 
     for (const Booleano of booleanos){
-        mudando.push (
-            Booleano === true ? 'Concluído' : 'Pendente')
+        mudando.push (Booleano === true ? console.log ('Concluído') : console.log('Pendente'))
     }
-
-    return mudando
+    
+return mudando
 
 }
-console.log(mudar([true]))
+mudar([true])
