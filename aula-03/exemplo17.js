@@ -6,5 +6,5 @@ console.log(dobro(9))
 import { moeda, validarMail, dataFormatada } from '../utils.js';
 
 console.log(moeda(0.1 + 0.2))
-console.log(validarMail('user@example.com'))
+console.log(validarMail('gabriel@gmail.com'))
 console.log(dataFormatada(new Date()))
