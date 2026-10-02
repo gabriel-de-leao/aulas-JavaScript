@@ -15,6 +15,4 @@ const elementosFake = [
     elemento.style.backgroundColor = '#FFFFFF'
 
     console.log (elementosFake)
-
-
   }
