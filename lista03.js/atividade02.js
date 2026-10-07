@@ -11,18 +11,19 @@ const elementosFake = [
     { id: 10, tagName: 'FOOTER', style: { color: 'white', display: 'flex' }, classList: ['footer-area'] }
 ];
 
+  
 elementosFake.forEach((elemento) => {
 
   for (let propriedade in elemento) {
 
-    if (propriedade === 'id') {
-      elemento.id = elemento.id < 10? `ID-0${elemento.id} `: `ID-${elemento.id}`;
+    if (elementosFake.id === true) {
+      elemento.id = elemento.id  ? `ID-0${elemento.id} `: `ID-${elemento.id}`;
     }
 
   }
 
 });
 
-console.log(elementosFake);
+console.log(elementosFake)
 
 
