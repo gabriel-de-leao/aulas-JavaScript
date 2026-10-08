@@ -1,4 +1,4 @@
-const numeros = [5, 12, 8, 130, 44];
-const mostrar = numeros.filter(numeros => numeros > 10);
+const numeros = [1, 2, 3];
+const soma = numeros.map(n => n + 5);
 
-console.log(mostrar); 
+console.log(soma); 
