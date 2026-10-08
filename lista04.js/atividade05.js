@@ -4,10 +4,7 @@ const apiProdutos = [
   { id: 103, nome: 'mouse gamer', preco: 125.45 } 
 ];
 
-const produtosFormatados = apiProdutos.map(produto => ({
-  ...produto,
-  nome: produto.nome[0].toUpperCase() + produto.nome.slice(1),
-  precoFormatado: `R$ ${produto.preco.toFixed(2)}`
+const produtosFormatados = apiProdutos.map(produto => ({ ...produto, nome: produto.nome[0].toUpperCase() + produto.nome.slice(1),precoFormatado: `R$ ${produto.preco.toFixed(2)}`
 }))
 
 console.log(produtosFormatados)
