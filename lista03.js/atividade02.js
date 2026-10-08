@@ -17,12 +17,12 @@ elementosFake.forEach((elemento) => {
   for (let propriedade in elemento) {
 
     if (elementosFake.id === true) {
-      elemento.id = elemento.id  ? `ID-0${elemento.id} `: `ID-${elemento.id}`
+      elemento.id = elemento.id   ? `ID-0${elemento.id} `: `ID-${elemento.id}`
     }
 
   }
 
-});
+})
 
 console.log(elementosFake)
 
