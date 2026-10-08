@@ -17,7 +17,7 @@ const elementosFake = [
   ];
 
         for (const cores in elementosFake) 
-            if (elementosFake[cores] .style.color === `blue`) {
-                console.log ("O elemento [tagName] é azul!")   
+            if (elementosFake[cores].style.color === 'blue') {
+                console.log (`O elemento ${elementosFake[cores].tagName} é azul!`)   
             
         }   
