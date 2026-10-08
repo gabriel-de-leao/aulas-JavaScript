@@ -1,4 +1,4 @@
-const lista = function(nomes= ['Gabriel', 'Andre', 'Samuel', 'Davi', 'Gustavo']) {
+const lista = function(nomes= []) {
 
     for (const lista of nomes) {
         console.log (lista)
@@ -7,4 +7,4 @@ const lista = function(nomes= ['Gabriel', 'Andre', 'Samuel', 'Davi', 'Gustavo'])
 
     }
 }
-lista()
+lista(['Gabriel', 'Andre', 'Samuel', 'Davi', 'Gustavo'])

@@ -1,4 +1,4 @@
-const listaVIP = (nomes=['Gabriel'], nomeBuscado='Gabriel') => {
+const listaVIP = (nomes=[], nomeBuscado='Gabriel') => {
 
   for (const nome of nomes) {
     if (nome === nomeBuscado) {
