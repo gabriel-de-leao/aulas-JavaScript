@@ -12,18 +12,20 @@ const elementosFake = [
 ];
 
   
+let id = 0
+
 elementosFake.forEach((elemento) => {
 
-  for (let propriedade in elemento) {
+  for (const propriedade in elemento) {
 
-    if (elementosFake.id === true) {
-      elemento.id = elemento.id  < 10 ? `ID-0${elemento.id} `: `ID-${elemento.id}`
+    if (propriedade === 'id') {
+     id += 1
+     elemento[propriedade] = 'ID-' + String(id).padStart(2,'0')
     }
 
   }
 
-})
+});
 
-console.log(elementosFake)
-
+console.log(elementosFake);
 
