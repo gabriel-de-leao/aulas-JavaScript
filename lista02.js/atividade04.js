@@ -20,7 +20,6 @@ const elementosFake = [
     
     for (const quant_classes in elementosFake)
         quantidade += elementosFake [quant_classes].classList.length
-    elementosFake.forEach(elemento => console.log(`Tag: ${elemento.tagName} possui as classes: ${elemento.classList.join(',')}`))
-    console.log (`No total, possui ${quantidade} classes`)
+    elementosFake.forEach(elemento => console.log(`Tag: ${elemento.tagName} , possui as classes: ${elemento.classList.join(',')}`)); console.log (`No total, possui ${quantidade} classes`)
     
    
